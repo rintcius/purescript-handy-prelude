@@ -1,3 +1,3 @@
-# purescript-prelude
+# purescript-handy-prelude
 
-A purescript prelude
+A handy purescript prelude
