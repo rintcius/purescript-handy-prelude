@@ -108,7 +108,7 @@ import Data.Identity (Identity(..))
 import Data.Identity1 (Identity1(..), mkIdentity1)
 import Data.Lens (Lens, Lens', Prism, Prism', Traversal, Traversal', Optic, (.~), (?~), (^.), (^?), (%~))
 import Data.Lens.Iso.Newtype (_Newtype)
-import Data.List (List(..))
+import Data.List (List(..), (:))
 import Data.List.NonEmpty (NonEmptyList)
 import Data.Map (Map)
 import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, isNothing, maybe, maybe', fromJust)
@@ -145,6 +145,7 @@ infixr 4 type Tuple as ×
 
 type As a = a → a
 
+type As1 ∷ ∀ k. (k → Type) → Type
 type As1 f = f ~> f
 
 asList = identity ∷ As1 List
