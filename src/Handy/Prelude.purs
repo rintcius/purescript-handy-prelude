@@ -36,7 +36,6 @@ module Handy.Prelude
   , module Data.FunctorWithIndex
   , module Data.Functor1
   , module Data.Generic.Rep
-  , module Data.Generic.Rep.Show
   , module Data.HeytingAlgebra
   , module Data.Identity
   , module Data.Identity1
@@ -62,7 +61,7 @@ module Handy.Prelude
   , module Data.Tuple
   , module Data.Variant
   , module Data.Void
-  , module Debug.Trace
+  , module Debug
   , module Effect
   , module Effect.Class
   , module Effect.Aff
@@ -89,7 +88,7 @@ import Control.Monad.Trans.Class (class MonadTrans, lift)
 import Control.MonadPlus (class MonadPlus, guard)
 import Control.Parallel (class Parallel, parTraverse, parTraverse_)
 import Control.Plus (class Plus, empty)
-import Data.Array.NonEmpty (NonEmptyArray) 
+import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Bifoldable (class Bifoldable, bitraverse_, bifor_)
 import Data.Bifunctor (class Bifunctor, bimap, lmap)
 import Data.Bitraversable (class Bitraversable, bitraverse, bisequence, bifor)
@@ -104,13 +103,12 @@ import Data.Functor.Coproduct (Coproduct, coproduct, left, right)
 import Data.FunctorWithIndex (class FunctorWithIndex, mapWithIndex)
 import Data.Functor1 (class Functor1, map1)
 import Data.Generic.Rep (class Generic)
-import Data.Generic.Rep.Show (genericShow)
 import Data.HeytingAlgebra (tt, ff)
 import Data.Identity (Identity(..))
 import Data.Identity1 (Identity1(..), mkIdentity1)
 import Data.Lens (Lens, Lens', Prism, Prism', Traversal, Traversal', Optic, (.~), (?~), (^.), (^?), (%~))
 import Data.Lens.Iso.Newtype (_Newtype)
-import Data.List (List(..))
+import Data.List (List(..), (:))
 import Data.List.NonEmpty (NonEmptyList)
 import Data.Map (Map)
 import Data.Maybe (Maybe(..), fromMaybe, fromMaybe', isJust, isNothing, maybe, maybe', fromJust)
@@ -129,9 +127,9 @@ import Data.Traversable (class Traversable, traverse, sequence, for)
 import Data.TraversableWithIndex (traverseWithIndex, forWithIndex)
 import Data.Traversable1 (class Traversable1, traverse1)
 import Data.Tuple (Tuple(..), fst, snd, uncurry)
-import Data.Variant (SProxy(..), Variant, case_, class Contractable, contract, expand)
+import Data.Variant (Variant, case_, class Contractable, contract, expand)
 import Data.Void (Void, absurd)
-import Debug.Trace (class DebugWarning, spy, trace, traceM)
+import Debug (class DebugWarning, spy, trace, traceM)
 import Effect (Effect)
 import Effect.Aff (Aff, Fiber, ParAff, joinFiber, forkAff)
 import Effect.Aff.Class (liftAff, class MonadAff)
@@ -147,6 +145,7 @@ infixr 4 type Tuple as ×
 
 type As a = a → a
 
+type As1 ∷ ∀ k. (k → Type) → Type
 type As1 f = f ~> f
 
 asList = identity ∷ As1 List
