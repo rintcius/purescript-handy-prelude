@@ -7,7 +7,7 @@ let additions =
       { functor1 =
         { dependencies = [ "newtype", "prelude" ]
         , repo = "https://github.com/garyb/purescript-functor1.git"
-        , version = "v1.0.0"
+        , version = "v2.0.0"
         }
       }
 
